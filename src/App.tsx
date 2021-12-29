@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
+import { fetchData, MovieTitles } from './fetchMovieData'
+import { Quiz } from './Quiz'
 
 const App = () => {
-  const [values, setValues] = useState({
+  const [values, setTitle] = useState<MovieTitles>({
     movie1: '',
     movie2: '',
     movie3: '',
@@ -11,18 +13,30 @@ const App = () => {
 
   const [submitted, setSubmitted] = useState(false)
   const [valid, setValid] = useState(false)
+  const [data, setData] = useState<string[]>([])
+
+
+  useEffect(() => {
+    if (submitted) {
+      const callFetch = async () => {
+        const jsonData = await fetchData(values)
+        setData(jsonData)
+      }
+      callFetch()
+    }
+  }, [submitted])
 
   const handleMovie1InputChange = (event: any) => {
-    setValues({ ...values, movie1: event.target.value })
+    setTitle({ ...values, movie1: event.target.value })
   }
   const handleMovie2InputChange = (event: any) => {
-    setValues({ ...values, movie2: event.target.value })
+    setTitle({ ...values, movie2: event.target.value })
   }
   const handleMovie3InputChange = (event: any) => {
-    setValues({ ...values, movie3: event.target.value })
+    setTitle({ ...values, movie3: event.target.value })
   }
   const handleMovie4InputChange = (event: any) => {
-    setValues({ ...values, movie4: event.target.value })
+    setTitle({ ...values, movie4: event.target.value })
   }
   const handleSubmit = (event: any) => {
     event.preventDefault()
@@ -40,7 +54,7 @@ const App = () => {
       </h2>
       <body>
         {submitted ? (
-          <p>Generating</p>
+          <Quiz {...data} />
         ) : (
           <p>
             Please enter four movie titles
