@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { json } from 'stream/consumers'
+import { MovieAnswers, MovieTitles } from './MovieTypes'
 
-export interface MovieTitles {
-  movie1: string
-  movie2: string
-  movie3: string
-  movie4: string
-}
-
-export const fetchData = async (values: MovieTitles): Promise<string[]> => {
+export const fetchData = async (
+  movieTitles: MovieTitles,
+): Promise<MovieAnswers[]> => {
   const apiUrl = 'https://www.omdbapi.com/?t='
   const apiKey = '&apikey=69942670'
-  const apiCall = apiUrl + values.movie1 + apiKey
-  let json = ''
-  let jsonArray = ['', '', '', '']
 
-  try {
-    const response = await fetch(apiCall)
-    json = await response.json()
-    console.log(json)
-  } catch (error) {
-    console.log('error', error)
+  let json
+  let movieAnswers: MovieAnswers[] = []
+
+  for (const [key, value] of Object.entries(movieTitles)) {
+    const apiCall = apiUrl + `${value}` + apiKey
+    try {
+      const response = await fetch(apiCall)
+      json = (await response.json()) as MovieAnswers
+      movieAnswers.push(Object.assign(new MovieAnswers(), json))
+    } catch (error) {
+      console.log('error', error)
+    }
   }
-  return jsonArray
+
+  return movieAnswers
 }

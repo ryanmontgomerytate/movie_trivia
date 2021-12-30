@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import ReactDOM from 'react-dom'
-import { fetchData, MovieTitles } from './fetchMovieData'
+import { fetchData } from './fetchMovieData'
+import { MovieTitles, MovieAnswers } from './MovieTypes'
 import { Quiz } from './Quiz'
 
-const App = () => {
-  const [values, setTitle] = useState<MovieTitles>({
+export const App: React.FC = () => {
+  const [titles, setTitle] = useState<MovieTitles>({
     movie1: '',
     movie2: '',
     movie3: '',
@@ -13,34 +13,33 @@ const App = () => {
 
   const [submitted, setSubmitted] = useState(false)
   const [valid, setValid] = useState(false)
-  const [data, setData] = useState<string[]>([])
-
+  const [movieAnswers, setTheMovieAnswers] = useState<MovieAnswers[]>([])
 
   useEffect(() => {
     if (submitted) {
       const callFetch = async () => {
-        const jsonData = await fetchData(values)
-        setData(jsonData)
+        const movieAnswersReturned = await fetchData(titles)
+        setTheMovieAnswers(movieAnswersReturned)
       }
       callFetch()
     }
   }, [submitted])
 
   const handleMovie1InputChange = (event: any) => {
-    setTitle({ ...values, movie1: event.target.value })
+    setTitle({ ...titles, movie1: event.target.value })
   }
   const handleMovie2InputChange = (event: any) => {
-    setTitle({ ...values, movie2: event.target.value })
+    setTitle({ ...titles, movie2: event.target.value })
   }
   const handleMovie3InputChange = (event: any) => {
-    setTitle({ ...values, movie3: event.target.value })
+    setTitle({ ...titles, movie3: event.target.value })
   }
   const handleMovie4InputChange = (event: any) => {
-    setTitle({ ...values, movie4: event.target.value })
+    setTitle({ ...titles, movie4: event.target.value })
   }
   const handleSubmit = (event: any) => {
     event.preventDefault()
-    if (values.movie1 && values.movie2 && values.movie3 && values.movie4) {
+    if (titles.movie1 && titles.movie2 && titles.movie3 && titles.movie4) {
       setValid(true)
     }
     setSubmitted(true)
@@ -52,11 +51,11 @@ const App = () => {
       <h2>
         Using <a href="http://www.omdbapi.com/">OMDb API</a>
       </h2>
-      <body>
-        {submitted ? (
-          <Quiz {...data} />
+      <div>
+        {submitted && movieAnswers.length > 0 ? (
+          <Quiz movieAnswers={movieAnswers} />
         ) : (
-          <p>
+          <div>
             Please enter four movie titles
             <form className="movies-form" onSubmit={handleSubmit}>
               {submitted && valid ? <div>Success!</div> : null}
@@ -64,48 +63,48 @@ const App = () => {
                 <li>
                   <input
                     onChange={handleMovie1InputChange}
-                    value={values.movie1}
+                    value={titles.movie1}
                     className="form-field"
                     placeholder="Movie Title One"
                     name="movie1"
                   />
-                  {submitted && !values.movie1 ? (
+                  {submitted && !titles.movie1 ? (
                     <span>Please enter movie title one.</span>
                   ) : null}
                 </li>
                 <li>
                   <input
                     onChange={handleMovie2InputChange}
-                    value={values.movie2}
+                    value={titles.movie2}
                     className="form-field"
                     placeholder="Movie Title Two"
                     name="movie2"
                   />
-                  {submitted && !values.movie2 ? (
+                  {submitted && !titles.movie2 ? (
                     <span>Please enter movie title two.</span>
                   ) : null}
                 </li>
                 <li>
                   <input
                     onChange={handleMovie3InputChange}
-                    value={values.movie3}
+                    value={titles.movie3}
                     className="form-field"
                     placeholder="Movie Title Three"
                     name="movie3"
                   />
-                  {submitted && !values.movie3 ? (
+                  {submitted && !titles.movie3 ? (
                     <span>Please enter movie title three.</span>
                   ) : null}
                 </li>
                 <li>
                   <input
                     onChange={handleMovie4InputChange}
-                    value={values.movie4}
+                    value={titles.movie4}
                     className="form-field"
                     placeholder="Movie Title Four"
                     name="movie4"
                   />
-                  {submitted && !values.movie4 ? (
+                  {submitted && !titles.movie4 ? (
                     <span>Please enter movie title four.</span>
                   ) : null}
                 </li>
@@ -114,11 +113,9 @@ const App = () => {
                 Generate
               </button>
             </form>
-          </p>
+          </div>
         )}
-      </body>
+      </div>
     </div>
   )
 }
-
-export default App
