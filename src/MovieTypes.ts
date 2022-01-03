@@ -1,7 +1,59 @@
-export const MovieQuestions = {
-  ACTOR_QUESTION: 'Who is the actor?',
-  MOVIE_RATINGS: "What are the ratings?"
+export interface MovieQuestion {
+  answerPropertyName: keyof MovieAnswers
+  question: string
 }
+
+export const MovieQuestions: MovieQuestion[] = [
+  {
+    answerPropertyName: 'Actors',
+    question: 'This movie had the following actors:',
+  },
+  {
+    answerPropertyName: 'Awards',
+    question: 'This movie recieved these recognitions: ',
+  },
+  {
+    answerPropertyName: 'BoxOffice',
+    question: 'This movie earned the following at the Box Office: ',
+  },
+  { answerPropertyName: 'DVD', question: 'This movie went to DVD on: ' },
+  { answerPropertyName: 'Director', question: 'This movie was directed by: ' },
+  { answerPropertyName: 'Genre', question: 'This movie is this genre: ' },
+  {
+    answerPropertyName: 'Metascore',
+    question: 'This movie has this Metascore: ',
+  },
+  { answerPropertyName: 'Plot', question: 'This movie has this plot: ' },
+  {
+    answerPropertyName: 'Poster',
+    question: 'This movie has the following Poster: ',
+  },
+  {
+    answerPropertyName: 'Rated',
+    question: 'This movie has the following film rating: ',
+  },
+  {
+    answerPropertyName: 'Ratings',
+    question: 'This movie has the following critic and audience ratings: ',
+  },
+  { answerPropertyName: 'Released', question: 'This movie was released on: ' },
+  {
+    answerPropertyName: 'Runtime',
+    question: 'This movie has the following runtime: ',
+  },
+  {
+    answerPropertyName: 'Writer',
+    question: 'This movie has the following writer(s): ',
+  },
+  {
+    answerPropertyName: 'imdbRating',
+    question: 'This movie has the following IMDB rating: ',
+  },
+  {
+    answerPropertyName: 'imdbVotes',
+    question: 'This movie has the following IMDB votes: ',
+  },
+]
 
 export interface MovieTitles {
   movie1: string
