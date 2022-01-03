@@ -3,6 +3,13 @@ export interface MovieQuestion {
   question: string
 }
 
+export interface MovieQuizScore {
+  quizQuestion: string
+  quizAnswer: string
+  quizGuess: string
+  isAnswerCorrect: boolean
+}
+
 export const MovieQuestions: MovieQuestion[] = [
   {
     answerPropertyName: 'Actors',
