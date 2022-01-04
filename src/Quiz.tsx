@@ -9,29 +9,22 @@ import {
 export const generateAnswerButtons = (
   movieAnswers: MovieAnswers[],
   index: number,
-  score: MovieQuizScore[],
-  setScore: (score: MovieQuizScore[]) => void,
+  setCurrentScore: (score: MovieQuizScore) => void,
   quizQuestion: string,
 ) => {
   const determineScore = (movieTitle: string) => {
-    const scoreList = score
     const actualAnswer = movieAnswers[index].Title
-    if (movieTitle === movieAnswers[index].Title) {
-      scoreList.push({
-        quizQuestion: quizQuestion,
-        quizAnswer: actualAnswer,
-        quizGuess: movieTitle,
-        isAnswerCorrect: true,
-      })
-    } else {
-      scoreList.push({
-        quizQuestion: quizQuestion,
-        quizAnswer: actualAnswer,
-        quizGuess: movieTitle,
-        isAnswerCorrect: false,
-      })
+    const movieQuizScore = {
+      quizQuestion: quizQuestion,
+      quizAnswer: actualAnswer,
+      quizGuess: movieTitle,
     }
-    setScore(scoreList)
+
+    if (movieTitle === actualAnswer) {
+      setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
+    } else {
+      setCurrentScore({ ...movieQuizScore, isAnswerCorrect: false })
+    }
   }
 
   return movieAnswers.map((movieAnswer) => (
@@ -44,24 +37,77 @@ export const generateAnswerButtons = (
   ))
 }
 
+export const MakeQuestion = (
+  movieAnswers: MovieAnswers[],
+  index: number,
+  currentQuestion: MovieQuestion,
+) => {
+  let theReturn: JSX.Element = <div>'Question not working'</div>
+
+  if (currentQuestion.question === 'N/A') {
+    theReturn = (
+      <h3>
+        {currentQuestion.question +
+          'not avaiable for this title!'}
+      </h3>
+    )
+  } else if (currentQuestion.answerPropertyName === 'Poster') {
+    theReturn = (
+      <div>
+        <h3>{currentQuestion.question}</h3>
+        <p>
+          <img
+            src={movieAnswers[index][currentQuestion.answerPropertyName]}
+            alt={movieAnswers[index].Title}
+            width="75"
+            height="100"
+          ></img>
+        </p>
+      </div>
+    )
+  } else if (currentQuestion.answerPropertyName === 'Ratings') {
+    theReturn = (
+      <div>
+        <h3>{currentQuestion.question}</h3>
+        {movieAnswers[index].Ratings.map((rating) => (
+          <ul>
+            <li>
+              {rating.Source}
+              <ul>
+                <li>{rating.Value}</li>
+              </ul>
+            </li>
+          </ul>
+        ))}
+      </div>
+    )
+  } else {
+    theReturn = (
+      <h3>
+        {currentQuestion.question +
+          movieAnswers[index][currentQuestion.answerPropertyName]}
+      </h3>
+    )
+  }
+
+  return theReturn
+}
+
 const DoQuiz = (
   movieAnswers: MovieAnswers[],
   index: number,
   score: MovieQuizScore[],
-  setScore: (scores: MovieQuizScore[]) => void,
+  setCurrentScore: (score: MovieQuizScore) => void,
   currentQuestion: MovieQuestion,
   handleNext: () => void,
 ) => {
   return (
     <div>
-      <h2>{`${currentQuestion.question} ${
-        movieAnswers[index][currentQuestion.answerPropertyName]
-      }`}</h2>
+      {MakeQuestion(movieAnswers, index, currentQuestion)}
       {generateAnswerButtons(
         movieAnswers,
         index,
-        score,
-        setScore,
+        setCurrentScore,
         currentQuestion.question +
           movieAnswers[index][currentQuestion.answerPropertyName],
       )}
@@ -71,15 +117,25 @@ const DoQuiz = (
   )
 }
 
-const showScore = (score: MovieQuizScore[]) => {
+const showScore = (totalScore: MovieQuizScore[]) => {
   let tally = 0
-  score.forEach((x) => (x.isAnswerCorrect ? (tally += 1) : null))
+  totalScore.forEach((x) => (x.isAnswerCorrect ? (tally += 1) : null))
+  const percentage = Math.round((tally / totalScore.length) * 100)
   return (
     <div>
       <h3>
-        Your Score is {tally} out of {score.length}. You got{' '}
-        {Math.round(tally / score.length)}
+        Your score is {tally} out of {totalScore.length}. You got {percentage}%
+        of the questions correct.
       </h3>
+      <div>
+        {totalScore.map((review) => (
+          <ul>
+            <li>{review.quizQuestion}</li>
+            <ul>Answer - {review.quizAnswer}</ul>
+            <ul>Guess - {review.quizGuess}</ul>
+          </ul>
+        ))}
+      </div>
     </div>
   )
 }
@@ -93,17 +149,26 @@ export const Quiz: React.FC<{ movieAnswers: MovieAnswers[] }> = ({
 }) => {
   const [index, setIndex] = useState<number>(getRandomQ(movieAnswers.length))
   const [quizQuestionNumber, setQuizQuestionNumber] = useState<number>(0)
-  const [score, setScore] = useState<MovieQuizScore[]>([])
+  const [totalScore, setTotalScore] = useState<MovieQuizScore[]>([])
+  const [currentScore, setCurrentScore] = useState<MovieQuizScore>()
   const [quizTime, setQuizTime] = useState(true)
   const handleNext = () => {
     setIndex(getRandomQ(movieAnswers.length))
-    console.log(MovieQuestions.length)
-    console.log(quizQuestionNumber)
     if (quizQuestionNumber < MovieQuestions.length - 1) {
       setQuizQuestionNumber(quizQuestionNumber + 1)
+      setTotalScore(
+        (oldScore) => [...oldScore, currentScore] as MovieQuizScore[],
+      )
     } else {
       setQuizTime(false)
     }
+    
+    if (movieAnswers[index][MovieQuestions[quizQuestionNumber].answerPropertyName] === 'N/A'){
+      console.log(MovieQuestions[quizQuestionNumber].question +
+        movieAnswers[index][MovieQuestions[quizQuestionNumber].answerPropertyName])
+    }
+
+
   }
   const currentQuestion: MovieQuestion = MovieQuestions[quizQuestionNumber]
 
@@ -111,12 +176,12 @@ export const Quiz: React.FC<{ movieAnswers: MovieAnswers[] }> = ({
     return DoQuiz(
       movieAnswers,
       index,
-      score,
-      setScore,
+      totalScore,
+      setCurrentScore,
       currentQuestion,
       handleNext,
     )
   } else {
-    return showScore(score)
+    return showScore(totalScore)
   }
 }

@@ -15,6 +15,13 @@ export const App: React.FC = () => {
   const [valid, setValid] = useState(false)
   const [movieAnswers, setTheMovieAnswers] = useState<MovieAnswers[]>([])
 
+  const reset = () => {
+    setSubmitted(false)
+    setValid(false)
+    setTheMovieAnswers([])
+    setTitle({ movie1: '', movie2: '', movie3: '', movie4: '' })
+  }
+
   useEffect(() => {
     if (submitted) {
       const callFetch = async () => {
@@ -53,7 +60,10 @@ export const App: React.FC = () => {
       </h2>
       <div>
         {submitted && movieAnswers.length > 0 ? (
-          <Quiz movieAnswers={movieAnswers} />
+          <div>
+            <Quiz movieAnswers={movieAnswers} />
+            <button onClick={reset}>Reset</button>
+          </div>
         ) : (
           <div>
             Please enter four movie titles
