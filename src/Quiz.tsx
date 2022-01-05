@@ -10,12 +10,12 @@ export const generateAnswerButtons = (
   movieAnswers: MovieAnswers[],
   index: number,
   setCurrentScore: (score: MovieQuizScore) => void,
-  quizQuestion: string,
+  theQuestion: JSX.Element
 ) => {
   const determineScore = (movieTitle: string) => {
     const actualAnswer = movieAnswers[index].Title
     const movieQuizScore = {
-      quizQuestion: quizQuestion,
+      quizQuestion: theQuestion,
       quizAnswer: actualAnswer,
       quizGuess: movieTitle,
     }
@@ -44,11 +44,11 @@ export const MakeQuestion = (
 ) => {
   let theReturn: JSX.Element = <div>'Question not working'</div>
 
-  if (currentQuestion.question === 'N/A') {
+  if (movieAnswers[index][currentQuestion.answerPropertyName] === 'N/A') {
     theReturn = (
       <h3>
         {currentQuestion.question +
-          'not avaiable for this title!'}
+          'information not avaiable for this title on IMDB'}
       </h3>
     )
   } else if (currentQuestion.answerPropertyName === 'Poster') {
@@ -108,8 +108,7 @@ const DoQuiz = (
         movieAnswers,
         index,
         setCurrentScore,
-        currentQuestion.question +
-          movieAnswers[index][currentQuestion.answerPropertyName],
+        MakeQuestion(movieAnswers, index, currentQuestion)
       )}
       <br />
       <button onClick={handleNext}>Next</button>
