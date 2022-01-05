@@ -4,7 +4,7 @@ export interface MovieQuestion {
 }
 
 export interface MovieQuizScore {
-  quizQuestion: string
+  quizQuestion: JSX.Element
   quizAnswer: string
   quizGuess: string
   isAnswerCorrect: boolean
