@@ -12,10 +12,6 @@ interface Props {
   movieAnswers: MovieAnswers[]
 }
 
-export const getRandomQ = (max: number) => {
-  return Math.floor(Math.random() * max)
-}
-
 export const Quiz: React.FC<Props> = ({ movieAnswers: movieAnswers }) => {
   const [index, setIndex] = useState<number>(getRandomQ(movieAnswers.length))
   const [quizQuestionNumber, setQuizQuestionNumber] = useState<number>(0)
@@ -49,4 +45,8 @@ export const Quiz: React.FC<Props> = ({ movieAnswers: movieAnswers }) => {
   } else {
     return <Results totalScore={totalScore} />
   }
+}
+
+const getRandomQ = (max: number) => {
+  return Math.floor(Math.random() * max)
 }
