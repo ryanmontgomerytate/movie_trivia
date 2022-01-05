@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fetchData } from './fetchMovieData'
 import { MovieTitles, MovieAnswers } from './MovieTypes'
-import { Quiz } from './Quiz'
+import { Quiz } from './Quiz/Quiz'
 
 export const App: React.FC = () => {
   const [titles, setTitle] = useState<MovieTitles>({

@@ -13,7 +13,7 @@ export interface MovieQuizScore {
 export const MovieQuestions: MovieQuestion[] = [
   {
     answerPropertyName: 'Actors',
-    question: 'This movie had the following actors:',
+    question: 'This movie had the following actors: ',
   },
   {
     answerPropertyName: 'Awards',
