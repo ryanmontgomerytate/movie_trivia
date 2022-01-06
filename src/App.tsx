@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { fetchData } from './fetchMovieData'
 import { MovieTitles, MovieAnswers } from './MovieTypes'
 import { Quiz } from './Quiz/Quiz'
+import './App.css'
+
 
 export const App: React.FC = () => {
   const [titles, setTitle] = useState<MovieTitles>({
@@ -53,8 +55,8 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Welcome to Movie Trivia Generator</h1>
+    <div className="App" style={{backgroundColor: 'blue'}}>
+      <h1 >Welcome to Movie Trivia Generator</h1>
       <h2>
         Using <a href="http://www.omdbapi.com/">OMDb API</a>
       </h2>
