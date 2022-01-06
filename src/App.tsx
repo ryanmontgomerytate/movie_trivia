@@ -3,14 +3,19 @@ import { fetchData } from './fetchMovieData'
 import { MovieTitles, MovieAnswers } from './MovieTypes'
 import { Quiz } from './Quiz/Quiz'
 import './App.css'
+import { TextField, Button, Grid, Paper } from '@mui/material'
 
+const noMovieEntered = 'Please enter a movie title.'
+
+const shouldDisplayError = (submitted: boolean, movieTitle: string | null) =>
+  submitted && !movieTitle
 
 export const App: React.FC = () => {
   const [titles, setTitle] = useState<MovieTitles>({
-    movie1: '',
-    movie2: '',
-    movie3: '',
-    movie4: '',
+    movie1: null,
+    movie2: null,
+    movie3: null,
+    movie4: null,
   })
 
   const [submitted, setSubmitted] = useState(false)
@@ -21,7 +26,7 @@ export const App: React.FC = () => {
     setSubmitted(false)
     setValid(false)
     setTheMovieAnswers([])
-    setTitle({ movie1: '', movie2: '', movie3: '', movie4: '' })
+    setTitle({ movie1: null, movie2: null, movie3: null, movie4: null })
   }
 
   useEffect(() => {
@@ -55,76 +60,88 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="App" style={{backgroundColor: 'blue'}}>
-      <h1 >Welcome to Movie Trivia Generator</h1>
-      <h2>
-        Using <a href="http://www.omdbapi.com/">OMDb API</a>
-      </h2>
+    <div className="App">
       <div>
-        {submitted && movieAnswers.length > 0 ? (
+        {submitted && valid && movieAnswers.length > 0 ? (
           <div>
             <Quiz movieAnswers={movieAnswers} />
-            <button onClick={reset}>Reset</button>
+            <Button onClick={reset}>Reset</Button>
           </div>
         ) : (
           <div>
-            Please enter four movie titles
-            <form className="movies-form" onSubmit={handleSubmit}>
-              {submitted && valid ? <div>Success!</div> : null}
-              <ol>
-                <li>
-                  <input
+            {submitted && valid ? <div>Success!</div> : null}
+
+            <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1 }}>
+              <h5>Please enter four movie titles</h5>
+              <Grid container rowSpacing={2} columnSpacing={{ sx: 5 }}>
+                <Grid item xs={6}>
+                  <TextField
+                    error={shouldDisplayError(submitted, titles.movie1)}
+                    helperText={
+                      shouldDisplayError(submitted, titles.movie1) &&
+                      noMovieEntered
+                    }
                     onChange={handleMovie1InputChange}
                     value={titles.movie1}
                     className="form-field"
                     placeholder="Movie Title One"
                     name="movie1"
                   />
-                  {submitted && !titles.movie1 ? (
-                    <span>Please enter movie title one.</span>
-                  ) : null}
-                </li>
-                <li>
-                  <input
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    error={shouldDisplayError(submitted, titles.movie2)}
+                    helperText={
+                      shouldDisplayError(submitted, titles.movie2) &&
+                      noMovieEntered
+                    }
                     onChange={handleMovie2InputChange}
                     value={titles.movie2}
                     className="form-field"
                     placeholder="Movie Title Two"
                     name="movie2"
                   />
-                  {submitted && !titles.movie2 ? (
-                    <span>Please enter movie title two.</span>
-                  ) : null}
-                </li>
-                <li>
-                  <input
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    error={shouldDisplayError(submitted, titles.movie3)}
+                    helperText={
+                      shouldDisplayError(submitted, titles.movie3) &&
+                      noMovieEntered
+                    }
                     onChange={handleMovie3InputChange}
                     value={titles.movie3}
                     className="form-field"
                     placeholder="Movie Title Three"
                     name="movie3"
                   />
-                  {submitted && !titles.movie3 ? (
-                    <span>Please enter movie title three.</span>
-                  ) : null}
-                </li>
-                <li>
-                  <input
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    error={shouldDisplayError(submitted, titles.movie4)}
+                    helperText={
+                      shouldDisplayError(submitted, titles.movie4) &&
+                      noMovieEntered
+                    }
                     onChange={handleMovie4InputChange}
                     value={titles.movie4}
                     className="form-field"
                     placeholder="Movie Title Four"
                     name="movie4"
                   />
-                  {submitted && !titles.movie4 ? (
-                    <span>Please enter movie title four.</span>
-                  ) : null}
-                </li>
-              </ol>
-              <button className="form-field" type="submit">
+                </Grid>
+              </Grid>
+
+              <Button
+                style={{ marginTop: '15px' }}
+                variant="contained"
+                className="form-field"
+                value="submit"
+                onClick={handleSubmit}
+              >
                 Generate
-              </button>
-            </form>
+              </Button>
+            </Paper>
           </div>
         )}
       </div>

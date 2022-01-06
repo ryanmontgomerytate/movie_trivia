@@ -1,8 +1,9 @@
+
 export const Header: React.FC = () => {
   return (
-    <div>
+    <header>
       <h1>Welcome to Movie Trivia Generator</h1>
-      <h4>Featuring OMDb API</h4>
-    </div>
+      <h5>Featuring <a href="http://www.omdbapi.com/">OMDb API</a></h5>
+    </header>
   )
 }

@@ -63,10 +63,10 @@ export const MovieQuestions: MovieQuestion[] = [
 ]
 
 export interface MovieTitles {
-  movie1: string
-  movie2: string
-  movie3: string
-  movie4: string
+  movie1: string | null
+  movie2: string | null
+  movie3: string | null
+  movie4: string | null
 }
 
 export interface MovieRating {

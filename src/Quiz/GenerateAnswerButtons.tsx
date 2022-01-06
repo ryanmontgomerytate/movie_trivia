@@ -1,5 +1,5 @@
 import { MovieAnswers, MovieQuestion, MovieQuizScore } from '../MovieTypes'
-import Button from 'react-bootstrap/Button';
+
 
 interface Props {
   movieAnswers: MovieAnswers[]
@@ -58,9 +58,9 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
   }
   const answerButtons = movieAnswers.map((movieAnswer) => (
     <div>
-      <Button type="button" onClick={() => determineScore(movieAnswer.Title)}>
+      <button type="button" onClick={() => determineScore(movieAnswer.Title)}>
         {movieAnswer.Title}
-      </Button>
+      </button>
       <br></br>
     </div>
   ))
