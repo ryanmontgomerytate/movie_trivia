@@ -1,5 +1,5 @@
 import { MovieAnswers, MovieQuestion, MovieQuizScore } from '../MovieTypes'
-
+import { Button, Grid } from '@mui/material'
 
 interface Props {
   movieAnswers: MovieAnswers[]
@@ -57,12 +57,15 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
     }
   }
   const answerButtons = movieAnswers.map((movieAnswer) => (
-    <div>
-      <button type="button" onClick={() => determineScore(movieAnswer.Title)}>
+    <Grid item xs={6}>
+      <Button
+        variant="contained"
+        type="button"
+        onClick={() => determineScore(movieAnswer.Title)}
+      >
         {movieAnswer.Title}
-      </button>
-      <br></br>
-    </div>
+      </Button>
+      </Grid>
   ))
 
   return <>{answerButtons}</>

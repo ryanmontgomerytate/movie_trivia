@@ -7,15 +7,15 @@ import { TextField, Button, Grid, Paper } from '@mui/material'
 
 const noMovieEntered = 'Please enter a movie title.'
 
-const shouldDisplayError = (submitted: boolean, movieTitle: string | null) =>
+const shouldDisplayError = (submitted: boolean, movieTitle: string) =>
   submitted && !movieTitle
 
 export const App: React.FC = () => {
   const [titles, setTitle] = useState<MovieTitles>({
-    movie1: null,
-    movie2: null,
-    movie3: null,
-    movie4: null,
+    movie1: '',
+    movie2: '',
+    movie3: '',
+    movie4: '',
   })
 
   const [submitted, setSubmitted] = useState(false)
@@ -26,7 +26,7 @@ export const App: React.FC = () => {
     setSubmitted(false)
     setValid(false)
     setTheMovieAnswers([])
-    setTitle({ movie1: null, movie2: null, movie3: null, movie4: null })
+    setTitle({ movie1: '', movie2: '', movie3: '', movie4: '' })
   }
 
   useEffect(() => {
@@ -64,16 +64,42 @@ export const App: React.FC = () => {
       <div>
         {submitted && valid && movieAnswers.length > 0 ? (
           <div>
-            <Quiz movieAnswers={movieAnswers} />
-            <Button onClick={reset}>Reset</Button>
+            <Paper
+              sx={{
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginTop: '50px',
+                p: 2,
+                maxWidth: 500,
+                flexGrow: 1,
+              }}
+            >
+              <Quiz movieAnswers={movieAnswers} />
+              <Button
+                style={{ marginTop: '15px' }}
+                variant="contained"
+                onClick={reset}
+              >
+                Reset
+              </Button>
+            </Paper>
           </div>
         ) : (
           <div>
             {submitted && valid ? <div>Success!</div> : null}
 
-            <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1 }}>
+            <Paper
+              sx={{
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginTop: '50px',
+                p: 2,
+                maxWidth: 500,
+                flexGrow: 1,
+              }}
+            >
               <h5>Please enter four movie titles</h5>
-              <Grid container rowSpacing={2} columnSpacing={{ sx: 5 }}>
+              <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={6}>
                   <TextField
                     error={shouldDisplayError(submitted, titles.movie1)}

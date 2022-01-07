@@ -1,6 +1,7 @@
 import { MovieAnswers, MovieQuestion, MovieQuizScore } from '../MovieTypes'
 import { GenerateAnswerButtons } from './GenerateAnswerButtons'
 import { GenerateQuestion } from './GenerateQuestion'
+import { Grid, Button } from '@mui/material'
 
 interface Props {
   movieAnswers: MovieAnswers[]
@@ -24,23 +25,30 @@ export const GenerateQuiz: React.FC<Props> = ({
         index={index}
         currentQuestion={currentQuestion}
       />
-
-      <GenerateAnswerButtons
-        movieAnswers={movieAnswers}
-        index={index}
-        setCurrentScore={setCurrentScore}
-        theQuestion={
-          <GenerateQuestion
-            movieAnswers={movieAnswers}
-            index={index}
-            currentQuestion={currentQuestion}
-          />
-        }
-        currentQuestion={currentQuestion}
-      />
+      <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <GenerateAnswerButtons
+          movieAnswers={movieAnswers}
+          index={index}
+          setCurrentScore={setCurrentScore}
+          theQuestion={
+            <GenerateQuestion
+              movieAnswers={movieAnswers}
+              index={index}
+              currentQuestion={currentQuestion}
+            />
+          }
+          currentQuestion={currentQuestion}
+        />
+      </Grid>
 
       <br />
-      <button onClick={handleNext}>Next</button>
+      <Button
+        style={{ marginTop: '15px' }}
+        variant="contained"
+        onClick={handleNext}
+      >
+        Next
+      </Button>
     </div>
   )
 }
