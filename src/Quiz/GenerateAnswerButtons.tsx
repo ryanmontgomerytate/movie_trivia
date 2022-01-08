@@ -1,5 +1,6 @@
 import { MovieAnswers, MovieQuestion, MovieQuizScore } from '../MovieTypes'
 import { Button, Grid } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 interface Props {
   movieAnswers: MovieAnswers[]
@@ -16,6 +17,15 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
   theQuestion,
   currentQuestion,
 }) => {
+  const [selected, setSelected] = useState<string>('')
+
+  const handleClick = (movieTitle: string) => {
+    determineScore(movieTitle)
+    setSelected(movieTitle)
+  }
+
+  useEffect(() => setSelected(''), [currentQuestion])
+
   const determineScore = (movieTitle: string) => {
     const actualAnswer = movieAnswers[index].Title
     const movieQuizScore = {
@@ -27,28 +37,29 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
     if (movieTitle === actualAnswer) {
       setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
     } else {
+      // if there are multiple correct answers of the same value
       if (
         movieAnswers[0][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        0 != index
+        0 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else if (
         movieAnswers[1][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        1 != index
+        1 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else if (
         movieAnswers[2][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        2 != index
+        2 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else if (
         movieAnswers[3][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        3 != index
+        3 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else {
@@ -57,16 +68,25 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
     }
   }
   const answerButtons = movieAnswers.map((movieAnswer) => (
-    <Grid item xs={6}>
+    <Grid key={movieAnswer.Title} item xs={6}>
       <Button
-        variant="contained"
+        key={movieAnswer.Title}
+        variant="outlined"
         type="button"
-        onClick={() => determineScore(movieAnswer.Title)}
+        onClick={() => handleClick(movieAnswer.Title)}
+        className={movieAnswer.Title}
+        color={movieAnswer.Title === selected ? 'secondary' : 'primary'}
+        size="large"
+        sx={{ minWidth: 240, minHeight: 70 }}
       >
         {movieAnswer.Title}
       </Button>
-      </Grid>
+    </Grid>
   ))
 
-  return <>{answerButtons}</>
+  return (
+    <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      {answerButtons}
+    </Grid>
+  )
 }

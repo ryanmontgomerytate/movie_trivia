@@ -63,7 +63,7 @@ export const MovieQuestions: MovieQuestion[] = [
 ]
 
 export interface MovieTitles {
-  movie1: string 
+  movie1: string
   movie2: string
   movie3: string
   movie4: string

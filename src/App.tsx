@@ -5,7 +5,7 @@ import { Quiz } from './Quiz/Quiz'
 import './App.css'
 import { TextField, Button, Grid, Paper } from '@mui/material'
 
-const noMovieEntered = 'Please enter a movie title.'
+const noMovieEntered = 'Enter a movie title'
 
 const shouldDisplayError = (submitted: boolean, movieTitle: string) =>
   submitted && !movieTitle
@@ -30,11 +30,11 @@ export const App: React.FC = () => {
   }
 
   useEffect(() => {
+    const callFetch = async () => {
+      const movieAnswersReturned = await fetchData(titles)
+      setTheMovieAnswers(movieAnswersReturned)
+    }
     if (submitted) {
-      const callFetch = async () => {
-        const movieAnswersReturned = await fetchData(titles)
-        setTheMovieAnswers(movieAnswersReturned)
-      }
       callFetch()
     }
   }, [submitted])
@@ -65,30 +65,24 @@ export const App: React.FC = () => {
         {submitted && valid && movieAnswers.length > 0 ? (
           <div>
             <Paper
+              elevation={18}
               sx={{
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 marginTop: '50px',
+                marginBottom: '50px',
                 p: 2,
                 maxWidth: 500,
                 flexGrow: 1,
               }}
             >
-              <Quiz movieAnswers={movieAnswers} />
-              <Button
-                style={{ marginTop: '15px' }}
-                variant="contained"
-                onClick={reset}
-              >
-                Reset
-              </Button>
+              <Quiz movieAnswers={movieAnswers} reset={reset} />
             </Paper>
           </div>
         ) : (
           <div>
-            {submitted && valid ? <div>Success!</div> : null}
-
             <Paper
+              elevation={18}
               sx={{
                 marginLeft: 'auto',
                 marginRight: 'auto',
@@ -98,8 +92,12 @@ export const App: React.FC = () => {
                 flexGrow: 1,
               }}
             >
-              <h5>Please enter four movie titles</h5>
-              <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <h2>🍿 Enter four movie titles 🍿</h2>
+              <Grid
+                container
+                rowSpacing={2}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
                 <Grid item xs={6}>
                   <TextField
                     error={shouldDisplayError(submitted, titles.movie1)}

@@ -10,25 +10,25 @@ import { Results } from './Results'
 
 interface Props {
   movieAnswers: MovieAnswers[]
+  reset: () => void
 }
 
-export const Quiz: React.FC<Props> = ({ movieAnswers: movieAnswers }) => {
+export const Quiz: React.FC<Props> = ({ movieAnswers, reset }) => {
   const [index, setIndex] = useState<number>(getRandomQ(movieAnswers.length))
   const [quizQuestionNumber, setQuizQuestionNumber] = useState<number>(0)
   const [totalScore, setTotalScore] = useState<MovieQuizScore[]>([])
-  const [currentScore, setCurrentScore] = useState<MovieQuizScore>()
+  const [currentScore, setCurrentScore] = useState<MovieQuizScore | null>(null)
   const [runQuiz, setRunQuiz] = useState(true)
 
   const handleNext = () => {
     setIndex(getRandomQ(movieAnswers.length))
-    if (quizQuestionNumber < MovieQuestions.length - 1) {
+    if (quizQuestionNumber !== MovieQuestions.length - 1) {
       setQuizQuestionNumber(quizQuestionNumber + 1)
-      setTotalScore(
-        (oldScore) => [...oldScore, currentScore] as MovieQuizScore[],
-      )
     } else {
       setRunQuiz(false)
     }
+    setTotalScore((oldScore) => [...oldScore, currentScore] as MovieQuizScore[])
+    setCurrentScore(null)
   }
   const currentQuestion: MovieQuestion = MovieQuestions[quizQuestionNumber]
 
@@ -37,13 +37,15 @@ export const Quiz: React.FC<Props> = ({ movieAnswers: movieAnswers }) => {
       <GenerateQuiz
         movieAnswers={movieAnswers}
         index={index}
+        currentScore={currentScore}
         setCurrentScore={setCurrentScore}
         currentQuestion={currentQuestion}
         handleNext={handleNext}
+        reset={reset}
       />
     )
   } else {
-    return <Results totalScore={totalScore} />
+    return <Results totalScore={totalScore} reset={reset} />
   }
 }
 

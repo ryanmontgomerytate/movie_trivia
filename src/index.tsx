@@ -5,8 +5,6 @@ import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 import { Header } from './Header'
 
-
-
 ReactDOM.render(
   <React.StrictMode>
     <Header />

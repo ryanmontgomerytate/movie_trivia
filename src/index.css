@@ -17,7 +17,7 @@ code {
 * Header
 * ----------------------
 */
-header{
+header {
   background-color: #d17c1b;
   min-height: 1vh;
   display: flex;
@@ -26,4 +26,36 @@ header{
   justify-content: center;
   font-size: calc(7px + 2vmin);
   color: white;
+}
+.image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  background-image: url('./assets/popcorn-kernel.jpeg');
+  background-repeat: repeat;
 }
