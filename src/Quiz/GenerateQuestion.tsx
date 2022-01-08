@@ -15,10 +15,10 @@ export const GenerateQuestion: React.FC<Props> = ({
 
   if (movieAnswers[index][currentQuestion.answerPropertyName] === 'N/A') {
     theReturn = (
-      <h3>
-        {currentQuestion.question} Information is not avaible and or did not
-        happen for this title.
-      </h3>
+      <>
+        <h3>{currentQuestion.question}</h3>
+        <p>Information is not avaible and or did not happen for this title.</p>
+      </>
     )
     // const firstNonEmptyAnswer = movieAnswers.find(
     //   (movieAnswer) =>
@@ -55,23 +55,18 @@ export const GenerateQuestion: React.FC<Props> = ({
       <div>
         <h3>{currentQuestion.question}</h3>
         {movieAnswers[index].Ratings.map((rating) => (
-          <ul>
-            <li>
-              {rating.Source}
-              <ul>
-                <li>{rating.Value}</li>
-              </ul>
-            </li>
-          </ul>
+          <p key={rating.Source}>
+            {rating.Source}: {rating.Value}
+          </p>
         ))}
       </div>
     )
   } else {
     theReturn = (
-      <h3>
-        {currentQuestion.question +
-          movieAnswers[index][currentQuestion.answerPropertyName]}
-      </h3>
+      <>
+        <h3>{currentQuestion.question}</h3>
+        <p>{movieAnswers[index][currentQuestion.answerPropertyName]}</p>
+      </>
     )
   }
   return theReturn

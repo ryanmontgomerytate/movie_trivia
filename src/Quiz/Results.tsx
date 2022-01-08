@@ -1,10 +1,12 @@
 import { MovieQuizScore } from '../MovieTypes'
+import { Button } from '@mui/material'
 
 interface Props {
   totalScore: MovieQuizScore[]
+  reset: () => void
 }
 
-export const Results: React.FC<Props> = ({ totalScore }) => {
+export const Results: React.FC<Props> = ({ totalScore, reset }) => {
   let tally = 0
   totalScore.forEach((x) => (x.isAnswerCorrect ? (tally += 1) : null))
   const percentage = Math.round((tally / totalScore.length) * 100)
@@ -15,15 +17,20 @@ export const Results: React.FC<Props> = ({ totalScore }) => {
         Your score is {tally} out of {totalScore.length}. You got {percentage}%
         of the questions correct.
       </h2>
+      <Button variant="contained" color="success" onClick={reset}>
+        🍿 Play again 🍿
+      </Button>
       <div>
-        {totalScore.map((review) => (
-          <div>
-            {review.quizQuestion}
-            <ul>Answer - {review.quizAnswer}</ul>
-            <ul>Guess - {review.quizGuess}</ul>
-            {review.quizAnswer !== review.quizGuess &&
-              review.isAnswerCorrect == true && (
-                <ul>Had multiple correct answers.</ul>
+        {totalScore.map((score, index) => (
+          <div key={index}>
+            {score.quizQuestion}
+            <p>Answer: {score.quizAnswer}</p>
+            <p>
+              Guess: {score.quizGuess} {score.isAnswerCorrect ? '🍿' : '❌'}
+            </p>
+            {score.quizAnswer !== score.quizGuess &&
+              score.isAnswerCorrect === true && (
+                <p>Had multiple correct answers.</p>
               )}
           </div>
         ))}

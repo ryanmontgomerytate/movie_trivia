@@ -9,7 +9,7 @@ export const fetchData = async (
   let json
   let movieAnswers: MovieAnswers[] = []
 
-  for (const [key, value] of Object.entries(movieTitles)) {
+  for (const [, value] of Object.entries(movieTitles)) {
     const apiCall = apiUrl + `${value}` + apiKey
     try {
       const response = await fetch(apiCall)
