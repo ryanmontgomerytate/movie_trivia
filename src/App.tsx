@@ -19,10 +19,12 @@ export const App: React.FC = () => {
   })
 
   const [submitted, setSubmitted] = useState(false)
+  const [isEmpty, setIsEmpty] = useState(true)
   const [valid, setValid] = useState(false)
   const [movieAnswers, setTheMovieAnswers] = useState<MovieAnswers[]>([])
 
   const reset = () => {
+    setIsEmpty(true)
     setSubmitted(false)
     setValid(false)
     setTheMovieAnswers([])
@@ -34,10 +36,10 @@ export const App: React.FC = () => {
       const movieAnswersReturned = await fetchData(titles)
       setTheMovieAnswers(movieAnswersReturned)
     }
-    if (submitted) {
+    if (submitted && !isEmpty) {
       callFetch()
     }
-  }, [submitted])
+  }, [submitted,isEmpty])
 
   const handleMovie1InputChange = (event: any) => {
     setTitle({ ...titles, movie1: event.target.value })
@@ -57,12 +59,14 @@ export const App: React.FC = () => {
       setValid(true)
     }
     setSubmitted(true)
+    if(titles.movie1 !== '' && titles.movie2 !== '' && titles.movie3 !== '' &&
+  titles.movie4 !== ''){setIsEmpty(false)}
   }
 
   return (
     <div className="App">
       <div>
-        {submitted && valid && movieAnswers.length > 0 ? (
+        {!isEmpty && submitted && valid && movieAnswers.length > 0 ? (
           <div>
             <Paper
               elevation={18}

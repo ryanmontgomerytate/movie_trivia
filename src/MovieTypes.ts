@@ -13,52 +13,52 @@ export interface MovieQuizScore {
 export const MovieQuestions: MovieQuestion[] = [
   {
     answerPropertyName: 'Actors',
-    question: 'This movie had the following actors: ',
+    question: 'This movie had the following actors ',
   },
   {
     answerPropertyName: 'Awards',
-    question: 'This movie recieved these recognitions: ',
+    question: 'This movie recieved these recognitions ',
   },
   {
     answerPropertyName: 'BoxOffice',
-    question: 'This movie earned the following at the Box Office: ',
+    question: 'This movie earned the following at the Box Office ',
   },
-  { answerPropertyName: 'DVD', question: 'This movie went to DVD on: ' },
-  { answerPropertyName: 'Director', question: 'This movie was directed by: ' },
-  { answerPropertyName: 'Genre', question: 'This movie is this genre: ' },
+  { answerPropertyName: 'DVD', question: 'This movie went to DVD on ' },
+  { answerPropertyName: 'Director', question: 'This movie was directed by ' },
+  { answerPropertyName: 'Genre', question: 'This movie is this genre ' },
   {
     answerPropertyName: 'Metascore',
-    question: 'This movie has this Metascore: ',
+    question: 'This movie has this Metascore ',
   },
-  { answerPropertyName: 'Plot', question: 'This movie has this plot: ' },
+  { answerPropertyName: 'Plot', question: 'This movie has this plot ' },
   {
     answerPropertyName: 'Poster',
-    question: 'This movie has the following Poster: ',
+    question: 'This movie has the following Poster ',
   },
   {
     answerPropertyName: 'Rated',
-    question: 'This movie has the following film rating: ',
+    question: 'This movie has the following film rating ',
   },
   {
     answerPropertyName: 'Ratings',
-    question: 'This movie has the following critic and audience ratings: ',
+    question: 'This movie has the following critic and audience ratings ',
   },
-  { answerPropertyName: 'Released', question: 'This movie was released on: ' },
+  { answerPropertyName: 'Released', question: 'This movie was released on ' },
   {
     answerPropertyName: 'Runtime',
-    question: 'This movie has the following runtime: ',
+    question: 'This movie has the following runtime ',
   },
   {
     answerPropertyName: 'Writer',
-    question: 'This movie has the following writer(s): ',
+    question: 'This movie has the following writer(s) ',
   },
   {
     answerPropertyName: 'imdbRating',
-    question: 'This movie has the following IMDB rating: ',
+    question: 'This movie has the following IMDB rating ',
   },
   {
     answerPropertyName: 'imdbVotes',
-    question: 'This movie has the following IMDB votes: ',
+    question: 'This movie has the following IMDB votes ',
   },
 ]
 
