@@ -20,6 +20,7 @@ export const Quiz: React.FC<Props> = ({ movieAnswers, reset }) => {
   const [currentScore, setCurrentScore] = useState<MovieQuizScore | null>(null)
   const [runQuiz, setRunQuiz] = useState(true)
 
+  let i: number = 0
   const handleNext = () => {
     setIndex(getRandomQ(movieAnswers.length))
     if (quizQuestionNumber !== MovieQuestions.length - 1) {
@@ -30,7 +31,20 @@ export const Quiz: React.FC<Props> = ({ movieAnswers, reset }) => {
     setTotalScore((oldScore) => [...oldScore, currentScore] as MovieQuizScore[])
     setCurrentScore(null)
   }
+
   const currentQuestion: MovieQuestion = MovieQuestions[quizQuestionNumber]
+  let avaiableIndex: number[] = []
+  for (i = 0; i < movieAnswers.length; i++) {
+    if (movieAnswers[i][currentQuestion.answerPropertyName] !== 'N/A') {
+      avaiableIndex.push(i)
+    }
+  }
+  if (avaiableIndex === []) {
+    setQuizQuestionNumber(quizQuestionNumber + 1)
+    console.log('skipped quiz question' + currentQuestion.question)
+  } else {
+    setIndex(getRandomQ(avaiableIndex[Math.random() * avaiableIndex.length]))
+  }
 
   if (runQuiz) {
     return (
