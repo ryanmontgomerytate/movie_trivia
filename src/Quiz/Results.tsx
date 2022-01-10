@@ -22,7 +22,7 @@ export const Results: React.FC<Props> = ({ totalScore }) => {
             <ul>Answer - {review.quizAnswer}</ul>
             <ul>Guess - {review.quizGuess}</ul>
             {review.quizAnswer !== review.quizGuess &&
-              review.isAnswerCorrect == true && (
+              review.isAnswerCorrect === true && (
                 <ul>Had multiple correct answers.</ul>
               )}
           </div>

@@ -29,25 +29,25 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
       if (
         movieAnswers[0][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        0 != index
+        0 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else if (
         movieAnswers[1][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        1 != index
+        1 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else if (
         movieAnswers[2][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        2 != index
+        2 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else if (
         movieAnswers[3][currentQuestion.answerPropertyName] ===
           movieAnswers[index][currentQuestion.answerPropertyName] &&
-        3 != index
+        3 !== index
       ) {
         setCurrentScore({ ...movieQuizScore, isAnswerCorrect: true })
       } else {
