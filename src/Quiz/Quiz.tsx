@@ -33,6 +33,7 @@ export const Quiz: React.FC<Props> = ({ movieData, reset }) => {
         movieData,
       )
       setQuizQuestionNumber(nextQuizQuestionNumber)
+      setCurrentQuestion(MovieQuestions[nextQuizQuestionNumber])
     } else {
       setRunQuiz(false)
     }
@@ -41,7 +42,6 @@ export const Quiz: React.FC<Props> = ({ movieData, reset }) => {
   }
 
   useEffect(() => {
-    setCurrentQuestion(MovieQuestions[quizQuestionNumber])
     let nonEmptyAnswers: MovieData[] = []
     for (let i = 0; i < movieData.length; i++) {
       if (movieData[i][currentQuestion.answerPropertyName] !== 'N/A') {
