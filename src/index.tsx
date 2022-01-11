@@ -3,10 +3,23 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { App } from './App'
 import reportWebVitals from './reportWebVitals'
+import { Header } from './Header'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#E20B0B',
+    },
+  },
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <Header />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 )
