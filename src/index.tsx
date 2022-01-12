@@ -5,6 +5,7 @@ import { App } from './App'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { BrowserRouter } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -21,9 +22,11 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+    <BrowserRouter>
       <Header />
       <App />
       <Footer />
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),

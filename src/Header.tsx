@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
+import { Link } from "react-router-dom";
 
 export interface ProjectPage {
   ProjectName: string
@@ -63,6 +64,10 @@ export const Header: React.FC = () => {
               🍿 Movie Trivia Generator
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Link to="/about">About</Link>
+            </Box>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {projectPages.map((page) => (
                 <Button
                   key={page.ProjectName}
@@ -73,6 +78,7 @@ export const Header: React.FC = () => {
                 </Button>
               ))}
             </Box>
+
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="GitHub Repository">
                 <IconButton
