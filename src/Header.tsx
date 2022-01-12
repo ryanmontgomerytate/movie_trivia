@@ -21,15 +21,10 @@ const projectPages: ProjectPage[] = [
     ProjectName: 'Home',
     ProjectSite: 'https://www.ryantatecodes.com/',
   },
-  {
-    ProjectName: 'Party List',
-    ProjectSite: 'https://www.partylist.ryantatecodes.com/',
-  },
 ]
 
 export const Header: React.FC = () => {
-  const gitRepo: string =
-    'https://github.com/ryanmontgomerytate/movie_trivia.git'
+  const gitRepo: string = 'https://github.com/ryanmontgomerytate/movie_trivia'
   const homeUrl: string = 'https://ryantatecodes.com'
 
   return (
@@ -44,7 +39,7 @@ export const Header: React.FC = () => {
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
               {' '}
-              🍿{' '}
+              🍿 Movie Trivia Generator{' '}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -65,7 +60,7 @@ export const Header: React.FC = () => {
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
               {' '}
-              🍿{' '}
+              🍿 Movie Trivia Generator
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {projectPages.map((page) => (
@@ -84,42 +79,11 @@ export const Header: React.FC = () => {
                   onClick={() => window.open(gitRepo, '_blank')}
                   aria-label="GitHub"
                 >
-                  <svg
-                    version="1.0"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32.000000pt"
-                    height="32.000000pt"
-                    viewBox="0 0 32.000000 32.000000"
-                    preserveAspectRatio="xMidYMid meet"
-                  >
-                    <g
-                      transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)"
-                      fill="#000000"
-                      stroke="none"
-                    >
-                      <path
-                        d="M95 306 c-113 -52 -127 -204 -25 -274 39 -26 50 -28 50 -7 0 8 -7 15
--15 15 -8 0 -25 12 -39 27 -28 30 -26 45 2 20 20 -19 48 -22 57 -8 3 5 -3 12
--14 16 -40 12 -54 41 -47 97 l7 53 89 0 89 0 7 -53 c7 -55 -7 -85 -45 -97 -13
--4 -16 -14 -13 -45 2 -22 7 -40 12 -40 4 0 22 10 40 22 93 64 91 191 -2 261
--34 25 -113 32 -153 13z"
-                      />
-                    </g>
-                  </svg>
+                  <img src={require('./assets/GitHub-Mark-Light-32px.png')} />
                 </IconButton>
               </Tooltip>
             </Box>
           </Toolbar>
-        </Container>
-      </AppBar>
-      <AppBar color="secondary" position="static">
-        <Container maxWidth="xl">
-          <Box sx={{ flexGrow: 0 }}>
-            <h1>Welcome to Movie Trivia Generator</h1>
-            <h2>
-              Featuring <a href="http://www.omdbapi.com/">OMDb API</a>
-            </h2>
-          </Box>
         </Container>
       </AppBar>
     </>
