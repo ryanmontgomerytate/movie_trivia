@@ -77,7 +77,7 @@ export const GenerateAnswerButtons: React.FC<Props> = ({
         className={movieAnswer.Title}
         color={movieAnswer.Title === selected ? 'secondary' : 'primary'}
         size="large"
-        sx={{ minWidth: 240, minHeight: 70 }}
+        sx={{ minHeight: 70 }}
       >
         {movieAnswer.Title}
       </Button>
