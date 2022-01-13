@@ -4,7 +4,7 @@ export const fetchData = async (
   movieTitles: MovieTitles,
 ): Promise<MovieData[]> => {
   const apiUrl = 'https://www.omdbapi.com/?t='
-  const apiKey = '&apikey=6994267'
+  const apiKey = '&apikey=69942670'
 
   let json
   let movieAnswers: MovieData[] = []
