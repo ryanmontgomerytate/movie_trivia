@@ -86,7 +86,6 @@ export class MovieData {
   Metascore: string
   Plot: string
   Poster: string
-  Production: string
   Rated: string
   Ratings: MovieRating[]
   Released: string

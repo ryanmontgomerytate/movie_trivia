@@ -7,6 +7,7 @@ import { Footer } from './Footer'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { About } from './About'
+import { fetchData } from './fetchMovieData'
 
 const theme = createTheme({
   palette: {
