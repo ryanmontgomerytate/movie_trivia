@@ -30,6 +30,8 @@ export const App: React.FC = () => {
   }
 
   useEffect(() => {
+    let unmounted = false
+
     const callFetch = async () => {
       const movieDataReturned = await fetchData(titles)
       setMovieData(movieDataReturned)
@@ -37,6 +39,7 @@ export const App: React.FC = () => {
     if (submitted && !isEmpty) {
       callFetch()
     }
+    return () =>{unmounted = true}
   }, [submitted, isEmpty])
 
   const handleMovie1InputChange = (event: any) => {

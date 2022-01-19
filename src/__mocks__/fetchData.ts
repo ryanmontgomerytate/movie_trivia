@@ -5,7 +5,7 @@ export default {
     fetchData: jest.fn(() => mockMovieDataList)
 }
 
-const mockResponseTheShawshankRedemption: MovieData = {
+export const mockResponseTheShawshankRedemption: MovieData = {
   Title: 'The Shawshank Redemption',
   Year: '1994',
   Rated: 'R',
@@ -34,7 +34,7 @@ const mockResponseTheShawshankRedemption: MovieData = {
   BoxOffice: '$28,699,976',
 }
 
-const mockResponseTheGodFather = {
+export const mockResponseTheGodFather = {
   Title: 'The Godfather',
   Year: '1972',
   Rated: 'R',
@@ -67,7 +67,7 @@ const mockResponseTheGodFather = {
   Response: 'True',
 }
 
-const mockResponseTheDarkKnight = {
+export const mockResponseTheDarkKnight = {
   Title: 'The Dark Knight',
   Year: '2008',
   Rated: 'PG-13',
@@ -100,7 +100,7 @@ const mockResponseTheDarkKnight = {
   Response: 'True',
 }
 
-const mockResponseParasite = {
+export const mockResponseParasite = {
   Title: 'Parasite',
   Year: '2019',
   Rated: 'R',
@@ -133,7 +133,7 @@ const mockResponseParasite = {
   Response: 'True',
 }
 
- const mockMovieDataList: MovieData[] = [
+ export const mockMovieDataList: MovieData[] = [
   mockResponseTheShawshankRedemption,
   mockResponseTheGodFather,
   mockResponseTheDarkKnight,
