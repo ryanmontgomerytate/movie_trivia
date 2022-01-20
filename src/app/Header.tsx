@@ -125,8 +125,7 @@ export const Header: React.FC = () => {
                         {page.ProjectName}
                       </Typography>
                     </MenuItem>
-                  ) 
-                  : page.ProjectName === 'Movie Trivia' ? (
+                  ) : page.ProjectName === 'Movie Trivia' ? (
                     <MenuItem
                       key={page.ProjectName}
                       onClick={handleCloseNavMenu}
@@ -139,8 +138,7 @@ export const Header: React.FC = () => {
                         {page.ProjectName}
                       </Typography>
                     </MenuItem>
-                  )
-                  : (
+                  ) : (
                     <MenuItem
                       key={page.ProjectName}
                       onClick={handleCloseNavMenu}
@@ -210,7 +208,7 @@ export const Header: React.FC = () => {
                   onClick={() => window.open(gitRepo, '_blank')}
                   aria-label="GitHub"
                 >
-                  <img src={require('./assets/GitHub-Mark-Light-32px.png')} />
+                  <img src={require('../assets/GitHub-Mark-Light-32px.png')} />
                 </IconButton>
               </Tooltip>
             </Box>

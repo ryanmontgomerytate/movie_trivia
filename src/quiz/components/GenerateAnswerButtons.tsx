@@ -1,4 +1,4 @@
-import { MovieData, MovieQuestion, MovieQuizScore } from '../MovieTypes'
+import { MovieData, MovieQuestion, MovieQuizScore } from '../types/MovieTypes'
 import { Button, Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
 

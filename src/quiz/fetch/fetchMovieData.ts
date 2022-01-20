@@ -1,4 +1,4 @@
-import { MovieData, MovieTitles } from './MovieTypes'
+import { MovieData, MovieTitles } from '../types/MovieTypes'
 
 export const fetchData = async (
   movieTitles: MovieTitles,

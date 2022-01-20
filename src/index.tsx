@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import { App } from './App'
-import { Header } from './Header'
-import { Footer } from './Footer'
+import { App } from './app/App'
+import { Header } from './app/Header'
+import { Footer } from './app/Footer'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { About } from './About'
-import { fetchData } from './fetchMovieData'
+import { About } from './app/About'
 
 const theme = createTheme({
   palette: {

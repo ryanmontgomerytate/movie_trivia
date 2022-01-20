@@ -1,4 +1,4 @@
-import { MovieData, MovieQuestion } from '../MovieTypes'
+import { MovieData, MovieQuestion } from '../types/MovieTypes'
 
 interface Props {
   movieData: MovieData[]
@@ -15,8 +15,8 @@ export const GenerateQuestion: React.FC<Props> = ({
   if (currentQuestion.answerPropertyName === 'Poster') {
     theReturn = (
       <div>
-        <h3 data-testid='questionPart1'>{currentQuestion.question}</h3>
-        <p data-testid='questionPart2'>
+        <h3 data-testid="questionPart1">{currentQuestion.question}</h3>
+        <p data-testid="questionPart2">
           <img
             src={movieData[index][currentQuestion.answerPropertyName]}
             alt={movieData[index].Title}
@@ -29,20 +29,23 @@ export const GenerateQuestion: React.FC<Props> = ({
   } else if (currentQuestion.answerPropertyName === 'Ratings') {
     theReturn = (
       <div>
-        <h3 data-testid='questionPart1'>{currentQuestion.question}</h3>
-        <div data-testid='questionPart2'>
-        {movieData[index].Ratings.map((rating) => (
-          <p key={rating.Source}>
-            {rating.Source}: {rating.Value}
-          </p>
-        ))}</div>
+        <h3 data-testid="questionPart1">{currentQuestion.question}</h3>
+        <div data-testid="questionPart2">
+          {movieData[index].Ratings.map((rating) => (
+            <p key={rating.Source}>
+              {rating.Source}: {rating.Value}
+            </p>
+          ))}
+        </div>
       </div>
     )
   } else {
     theReturn = (
       <>
-        <h3 data-testid='questionPart1'>{currentQuestion.question}</h3>
-        <p data-testid='questionPart2'>{movieData[index][currentQuestion.answerPropertyName]}</p>
+        <h3 data-testid="questionPart1">{currentQuestion.question}</h3>
+        <p data-testid="questionPart2">
+          {movieData[index][currentQuestion.answerPropertyName]}
+        </p>
       </>
     )
   }

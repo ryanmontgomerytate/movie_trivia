@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Typography } from '@mui/material'
+import { Tooltip, Typography } from '@mui/material'
 import React from 'react'
 
 export const Footer: React.FC = () => {
@@ -7,7 +7,9 @@ export const Footer: React.FC = () => {
     <div className="footer">
       <Typography noWrap component="div" sx={{ color: 'white' }}>
         Built from
-        <FooterLink href="http://www.omdbapi.com/"> OMDb API</FooterLink>
+        <Tooltip title="http://www.omdbapi.com/">
+          <FooterLink href="http://www.omdbapi.com/"> OMDb API</FooterLink>
+        </Tooltip>
       </Typography>
     </div>
   )

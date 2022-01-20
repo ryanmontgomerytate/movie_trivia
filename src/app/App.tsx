@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { fetchData } from './fetchMovieData'
-import { MovieTitles, MovieData } from './MovieTypes'
-import { Quiz } from './Quiz/Quiz'
+import { fetchData } from '../quiz/fetch/fetchMovieData'
+import { MovieTitles, MovieData } from '../quiz/types/MovieTypes'
+import { Quiz } from '../quiz/components/Quiz'
 import './App.css'
 import { TextField, Button, Grid, Paper } from '@mui/material'
 
@@ -39,7 +39,9 @@ export const App: React.FC = () => {
     if (submitted && !isEmpty) {
       callFetch()
     }
-    return () =>{unmounted = true}
+    return () => {
+      unmounted = true
+    }
   }, [submitted, isEmpty])
 
   const handleMovie1InputChange = (event: any) => {
@@ -114,7 +116,7 @@ export const App: React.FC = () => {
                     error={shouldDisplayError(submitted, titles.movie1)}
                     helperText={
                       shouldDisplayError(submitted, titles.movie1) &&
-                      ("Enter the first movie title")
+                      'Enter the first movie title'
                     }
                     onChange={handleMovie1InputChange}
                     value={titles.movie1}
@@ -128,7 +130,7 @@ export const App: React.FC = () => {
                     error={shouldDisplayError(submitted, titles.movie2)}
                     helperText={
                       shouldDisplayError(submitted, titles.movie2) &&
-                      ("Enter the second movie title")
+                      'Enter the second movie title'
                     }
                     onChange={handleMovie2InputChange}
                     value={titles.movie2}
@@ -142,7 +144,7 @@ export const App: React.FC = () => {
                     error={shouldDisplayError(submitted, titles.movie3)}
                     helperText={
                       shouldDisplayError(submitted, titles.movie3) &&
-                      ("Enter the third movie title")
+                      'Enter the third movie title'
                     }
                     onChange={handleMovie3InputChange}
                     value={titles.movie3}
@@ -156,7 +158,7 @@ export const App: React.FC = () => {
                     error={shouldDisplayError(submitted, titles.movie4)}
                     helperText={
                       shouldDisplayError(submitted, titles.movie4) &&
-                      ("Enter the fourth movie title")
+                      'Enter the fourth movie title'
                     }
                     onChange={handleMovie4InputChange}
                     value={titles.movie4}

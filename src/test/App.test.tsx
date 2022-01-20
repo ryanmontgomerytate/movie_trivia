@@ -1,11 +1,10 @@
-import React from 'react'
 import {
   fireEvent,
   render,
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react'
-import { App } from './App'
+import { App } from '../app/App'
 import {
   mockMovieDataList,
   mockResponseParasite,
@@ -13,7 +12,7 @@ import {
   mockResponseTheGodFather,
   mockResponseTheShawshankRedemption,
 } from './__mocks__/fetchData'
-import { MovieData, MovieQuestions } from './MovieTypes'
+import { MovieQuestions } from '../quiz/types/MovieTypes'
 
 describe('Individual pieces of App', () => {
   test('should render input element', async () => {
@@ -287,15 +286,16 @@ describe('Individual pieces of App', () => {
 
     const nextButton = screen.getByRole('button', { name: /Next/i })
 
-    expect(nextButton).toBeDisabled()
+    expect(nextButton).toBeDisabled
 
     fireEvent.click(buttonMovie1)
 
-    expect(nextButton).not.toBeDisabled()
+    expect(nextButton).not.toBeDisabled
 
     fireEvent.click(nextButton)
 
-    expect(screen.getByTestId('questionPart1').textContent).toBe(MovieQuestions[1].question)
-
+    expect(screen.getByTestId('questionPart1').textContent).toBe(
+      MovieQuestions[1].question,
+    )
   })
 })

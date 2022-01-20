@@ -1,4 +1,4 @@
-import { MovieData, MovieQuestion, MovieQuizScore } from '../MovieTypes'
+import { MovieData, MovieQuestion, MovieQuizScore } from '../types/MovieTypes'
 import { GenerateAnswerButtons } from './GenerateAnswerButtons'
 import { GenerateQuestion } from './GenerateQuestion'
 import { Grid, Button } from '@mui/material'
