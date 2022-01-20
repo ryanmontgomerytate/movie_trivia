@@ -1,8 +1,7 @@
-import { MovieData } from '../MovieTypes'
-
+import { MovieData } from '../../quiz/types/MovieTypes'
 
 export default {
-    fetchData: jest.fn(() => mockMovieDataList)
+  fetchData: jest.fn(() => mockMovieDataList),
 }
 
 export const mockResponseTheShawshankRedemption: MovieData = {
@@ -133,12 +132,9 @@ export const mockResponseParasite = {
   Response: 'True',
 }
 
- export const mockMovieDataList: MovieData[] = [
+export const mockMovieDataList: MovieData[] = [
   mockResponseTheShawshankRedemption,
   mockResponseTheGodFather,
   mockResponseTheDarkKnight,
-  mockResponseParasite
+  mockResponseParasite,
 ]
-
-
-

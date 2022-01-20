@@ -1,4 +1,4 @@
-import { MovieQuizScore } from '../MovieTypes'
+import { MovieQuizScore } from '../types/MovieTypes'
 import { Button } from '@mui/material'
 
 interface Props {

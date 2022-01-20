@@ -5,7 +5,7 @@ import {
   MovieQuestion,
   MovieQuestions,
   MovieQuizScore,
-} from '../MovieTypes'
+} from '../types/MovieTypes'
 import { GenerateQuiz } from './GenerateQuiz'
 import { Results } from './Results'
 
