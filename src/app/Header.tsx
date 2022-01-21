@@ -5,7 +5,6 @@ import {
   Toolbar,
   Typography,
   Box,
-  Button,
   IconButton,
   Tooltip,
   Menu,
@@ -208,7 +207,7 @@ export const Header: React.FC = () => {
                   onClick={() => window.open(gitRepo, '_blank')}
                   aria-label="GitHub"
                 >
-                  <img src={require('../assets/GitHub-Mark-Light-32px.png')} />
+                  <img src={require('../assets/GitHub-Mark-Light-32px.png')} alt='GitHub Icon'/>
                 </IconButton>
               </Tooltip>
             </Box>
