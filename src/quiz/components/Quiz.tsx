@@ -44,13 +44,16 @@ export const Quiz: React.FC<Props> = ({ movieData, reset }) => {
   useEffect(() => {
     let nonEmptyAnswers: MovieData[] = []
     for (let i = 0; i < movieData.length; i++) {
-      if (movieData[i][currentQuestion.answerPropertyName] !== 'N/A') {
+      if (
+        movieData[i][currentQuestion.answerPropertyName] !== 'N/A' &&
+        movieData[i][currentQuestion.answerPropertyName] !== undefined
+      ) {
         nonEmptyAnswers.push(movieData[i])
       }
     }
     const randomIndex = getRandomDataSetIndex(nonEmptyAnswers.length)
     setIndex(movieData.indexOf(nonEmptyAnswers[randomIndex]))
-  }, [quizQuestionNumber])
+  }, [quizQuestionNumber, currentQuestion.answerPropertyName, movieData])
 
   if (runQuiz) {
     return (
@@ -85,7 +88,14 @@ const figureNextQuizQuestionNumber = (
     maybeQuizQuestionNumber = quizQuestionNumber + count
     const nextQuizQuestion = MovieQuestions[maybeQuizQuestionNumber]
     for (let i = 0; i <= movieData.length - 1; i++) {
-      if (movieData[i][nextQuizQuestion.answerPropertyName] !== 'N/A') {
+      if (
+        movieData[i][nextQuizQuestion.answerPropertyName] !== 'N/A' &&
+        movieData[i][nextQuizQuestion.answerPropertyName] !== undefined
+      ) {
+        if (movieData[i][nextQuizQuestion.answerPropertyName] === undefined) {
+          console.log(movieData[i][nextQuizQuestion.answerPropertyName])
+        }
+
         avaiableAnswers.push(movieData[i])
       }
     }
